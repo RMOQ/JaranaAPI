@@ -3,7 +3,7 @@ import {Task} from '../models/Task.js'
 export const getTasks = async (req, res) => {
     try{
         const tasks = await Task.findAll()
-        res.send(tasks)
+        res.status(200).send(tasks)
     } catch (error) {
         return res.status(500).json({ message: error.message })
     }
@@ -23,7 +23,7 @@ export const getTask = async (req, res) => {
             return res.status(400).json({message: 'Task does not exist'})
         }
 
-        res.json(task)
+        res.status(200).json(task)
     } catch (error) {
         return res.status(500).json({ message: error.message })
     }
@@ -39,7 +39,7 @@ export const createTask = async (req, res) => {
             projectId
         })
         
-        res.json(newTask)
+        res.status(201).json(newTask)
 
     } catch (error) {
         return res.status(500).json({ message: error.message })
@@ -56,7 +56,7 @@ export const updateTask = async (req, res) => {
         task.set(req.body)
         await task.save()
 
-        res.json(task)
+        res.status(200).json(task)
     }  catch (error) {
         return res.status(500).json({ message: error.message })
     }

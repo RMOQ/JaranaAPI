@@ -3,7 +3,7 @@ import {Teacher} from '../models/Teacher.js'
 export const getTeachers = async (req, res) => {
     try{
         const teacher = await Teacher.findAll()
-        res.send(teacher)
+        res.status(200).send(teacher)
     } catch (error) {
         return res.status(500).json({ message: error.message })
     }
@@ -23,7 +23,7 @@ export const getTeacher = async (req, res) => {
             return res.status(400).json({message: 'student does not exist'})
         };
 
-        res.json(teacher);
+        res.status(200).json(teacher);
     } catch (error) {
         return res.status(500).json({ message: error.message })
     }
@@ -44,7 +44,7 @@ export const createTeachers = async (req, res) => {
             groupId
         });
         
-        res.json(newTeacher);
+        res.status(201).json(newTeacher);
 
     } catch (error) {
         return res.status(500).json({ message: error.message });
@@ -61,7 +61,7 @@ export const updateTeachers = async (req, res) => {
         teacher.set(req.body)
         await teacher.save()
 
-        res.json(teacher)
+        res.status(201).json(teacher)
     }  catch (error) {
         return res.status(500).json({ message: error.message })
     }

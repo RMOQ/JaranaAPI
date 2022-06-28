@@ -6,6 +6,7 @@ import teachersRoutes from './routes/teachers.routes.js';
 import groupsRoutes from './routes/groups.routes.js';
 
 
+
 const app = express();
 
 //middleware

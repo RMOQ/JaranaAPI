@@ -24,7 +24,7 @@ export const getLesson = async (req, res) => {
             return res.status(400).json({message: 'Lesson does not exist'});
         }
 
-        res.json(lesson);
+        res .status(200).json(lesson);
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }
@@ -42,7 +42,7 @@ export const createLesson = async (req, res) => {
             groupId
         });
         
-        res.json(newLesson);
+        res .status(201).json(newLesson);
 
     } catch (error) {
         return res.status(500).json({ message: error.message })
@@ -61,7 +61,7 @@ export const updateLesson = async (req, res) => {
         lesson.description = description;
         await lesson.save();
 
-        res.json(lesson);
+        res .status(201).json(lesson);
     }  catch (error) {
         return res.status(500).json({ message: error.message });
     }
@@ -90,7 +90,7 @@ export const getLessonTasks = async (req, res) => {
         const tasks = await Task.findAll({
             where: {lessonId : id}
         })
-        res.json(tasks);
+        res.status(200).json(tasks);
     }  catch (error) {
         return res.status(500).json({ message: error.message });
     }

@@ -26,7 +26,8 @@ export const getGroup = async (req, res) => {
             return res.status(400).json({message: 'Group does not exist'});
         }
 
-        res.json(group);
+        res.status(200).json(group);
+
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }
@@ -42,7 +43,7 @@ export const createGroup = async (req, res) => {
             description
         });
         
-        res.json(newGroup);
+        res.status(201).json(newGroup);
 
     } catch (error) {
         return res.status(500).json({ message: error.message });
@@ -62,7 +63,7 @@ export const updateGroup = async (req, res) => {
         group.description = description;
         await group.save();
 
-        res.json(group);
+        res.status(201).json(group);
     }  catch (error) {
         return res.status(500).json({ message: error.message });
     }
@@ -91,7 +92,7 @@ export const getGroupStudents = async (req, res) => {
         const student = await Student.findAll({
             where: {roupId : id}
         })
-        res.json(student);
+        res.status(200).json(student);
     }  catch (error) {
         return res.status(500).json({ message: error.message });
     }
@@ -103,7 +104,7 @@ export const getGroupTeacher = async (req, res) => {
         const teacher = await Teacher.findAll({
             where: {roupId : id}
         });
-        res.json(teacher);
+        res.status(200).json(teacher);
     }  catch (error) {
         return res.status(500).json({ message: error.message });
     }

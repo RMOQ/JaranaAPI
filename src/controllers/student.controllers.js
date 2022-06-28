@@ -23,7 +23,7 @@ export const getStudent = async (req, res) => {
             return res.status(400).json({message: 'student does not exist'});
         };
 
-        res.json(student);
+        res.status(200).json(student);
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }
@@ -31,7 +31,7 @@ export const getStudent = async (req, res) => {
 }
 
 export const createStudent = async (req, res) => {
-    const {student_name, student_lastname, email, n_doc, n_telf, userId} = req.body
+    const {student_name, student_lastname, email, n_doc, n_telf, userId, groupId} = req.body
     try{
         if (!email) throw {  message: "El email es obligatorio" };
         const newStudent = await Student.create({
@@ -44,7 +44,7 @@ export const createStudent = async (req, res) => {
             groupId
         });
         
-        res.json(newStudent);
+        res.status(201).json(newStudent);
 
     } catch (error) {
         return res.status(500).json({ message: error.message });
@@ -54,14 +54,14 @@ export const createStudent = async (req, res) => {
 
 export const updateStudent = async (req, res) => {
     const { id } = req.params;
-    const { student_name, student_lastname, email, n_doc, n_telf } = req.body;
+    const { student_name, student_lastname, email, n_doc, n_telf, groupId} = req.body;
 
     try{
         const student = await Student.findByPk(id);
         student.set(req.body);
         await student.save();
 
-        res.json(student);
+        res.status(201).json(student);
     }  catch (error) {
         return res.status(500).json({ message: error.message });
     }
